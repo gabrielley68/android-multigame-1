@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Android-Multi-Game</string>
+    <string name="splashScreentext">Android-Multi-Game</string>
+
+    <string name="createPlayerWelcome">Bienvenue !</string>
+    <string name="create_player_localisation">localisation</string>
+    <string name="create_player_name">name</string>
+    <string name="create_player_firstname">firstname</string>
+    <string name="create_player_age">age</string>
+    <string name="create_player_btn_players">Players</string>
+    <string name="create_player_btn_validate">validate</string>
+
+    <string name="show_player_name">Thubé</string>
+    <string name="show_player_firstname">Florian</string>
+    <string name="show_player_score">0</string>
+
+    <string name="view_all_players">Liste des joueurs</string>
+
+    <string name="fragment_dragndrop">Drag and Drop !</string>
+    <string name="fragment_fasttap_game_txt">Fast Tap !</string>
+    <string name="fragment_ipacgame">Ipac Game !</string>
+    <string name="fragment_swipe">Swipe !</string>
+    <string name="fragment_settings">Settings</string>
+
+    <string name="fragment_fasttap_score">Score : 0</string>
+    <string name="fragment_fasttap_time">Temps restant : 30s</string>
+    <string name="fragment_fasttap_tap">%Tap$d</string>
+    <string name="fragment_fasttap_start">Commencer</string>
+    <string name="endgame_score">Votre score est de 0</string>
+    <string name="endgame_menu">Menu</string>
+    <string name="endgame_leave">Quitter</string>
+</resources>
