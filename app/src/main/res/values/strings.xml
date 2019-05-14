@@ -29,4 +29,16 @@
     <string name="endgame_score">Votre score est de 0</string>
     <string name="endgame_menu">Menu</string>
     <string name="endgame_leave">Quitter</string>
+
+    <string name="number_try">Il reste %d essais !</string>
+    <string name="number_type">Rentrez un nombre</string>
+    <string name="number_info_text_plus">C\'est plus</string>
+    <string name="number_info_text_less">C\'est moins</string>
+    <string name="base_info_text">Entrer un nombre !</string>
+    <string name="textFinalResultWin">Bravo !</string>
+    <string name="textFinalResultLose">Perdu !</string>
+    <string name="validate">valider</string>
+    <string name="relancer">Relancer</string>
+    <string name="quitter">Quitter</string>
+    <string name="splashscreentxt">Chargement...</string>
 </resources>

@@ -8,9 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.flori.android_multi_game.fragment.FastTapFragment;
+import com.example.flori.android_multi_game.fragment.MenuFragment;
 import com.example.flori.android_multi_game.fragment.FastTapFragmentInGame;
-import com.example.flori.android_multi_game.fragment.IpacGameFragment;
 import com.example.flori.android_multi_game.fragment.SettingsFragment;
 import com.example.flori.android_multi_game.utils.CustomViewPager;
 
@@ -37,23 +36,28 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         Bundle bundle3 = new Bundle();
         bundle3.putString("MENU", "dragndrop");
-        FastTapFragment fragmentStart3 = new FastTapFragment();
+        MenuFragment fragmentStart3 = new MenuFragment();
         fragmentStart3.setArguments(bundle3);
         fragments.add(fragmentStart3);
 
         Bundle bundle2 = new Bundle();
         bundle2.putString("MENU", "swipe");
-        FastTapFragment fragmentStart2 = new FastTapFragment();
+        MenuFragment fragmentStart2 = new MenuFragment();
         fragmentStart2.setArguments(bundle2);
         fragments.add(fragmentStart2);
 
         Bundle bundle = new Bundle();
         bundle.putString("MENU", "fasttap");
-        FastTapFragment fragmentStart = new FastTapFragment();
+        MenuFragment fragmentStart = new MenuFragment();
         fragmentStart.setArguments(bundle);
         fragments.add(fragmentStart);
 
-        fragments.add(new IpacGameFragment());
+        Bundle bundle4 = new Bundle();
+        bundle4.putString("MENU", "IpacGame");
+        MenuFragment fragmentStart4 = new MenuFragment();
+        fragmentStart4.setArguments(bundle4);
+        fragments.add(fragmentStart4);
+
         fragments.add(new SettingsFragment());
 
         FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {

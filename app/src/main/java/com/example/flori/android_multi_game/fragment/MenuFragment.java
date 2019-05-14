@@ -4,23 +4,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.flori.android_multi_game.MainActivity;
 import com.example.flori.android_multi_game.R;
 import com.example.flori.android_multi_game.utils.GameUtils;
 
-import static com.example.flori.android_multi_game.utils.GameUtils.addFragmentToActivity;
-
-public class FastTapFragment extends Fragment {
+public class MenuFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -43,6 +37,9 @@ public class FastTapFragment extends Fragment {
         if (menu.equals("dragndrop")) {
             gameName.setText("Drag N Drop !");
         }
+        if (menu.equals("IpacGame")) {
+            gameName.setText("IPAC Game !");
+        }
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,20 +49,24 @@ public class FastTapFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString("GAME", "fasttap");
                     fragment.setArguments(bundle);
-                    GameUtils.addFragmentToFragment(FastTapFragment.this, fragment, frameLayout.getId());
+                    GameUtils.addFragmentToFragment(MenuFragment.this, fragment, frameLayout.getId());
                 }
                 if (menu.equals("swipe")) {
                     FastTapFragmentInGame fragment = new FastTapFragmentInGame();
                     Bundle bundle = new Bundle();
                     bundle.putString("GAME", "swipe");
                     fragment.setArguments(bundle);
-                    GameUtils.addFragmentToFragment(FastTapFragment.this, fragment, frameLayout.getId());
+                    GameUtils.addFragmentToFragment(MenuFragment.this, fragment, frameLayout.getId());
                 }
 
                 if (menu.equals("dragndrop")) {
                     DragnDropFragmentInGame fragment = new DragnDropFragmentInGame();
-                    GameUtils.addFragmentToFragment(FastTapFragment.this, fragment, frameLayout.getId());
+                    GameUtils.addFragmentToFragment(MenuFragment.this, fragment, frameLayout.getId());
+                }
 
+                if (menu.equals("IpacGame")) {
+                    IpacGameFragmentInGame fragment = new IpacGameFragmentInGame();
+                    GameUtils.addFragmentToFragment(MenuFragment.this, fragment, frameLayout.getId());
                 }
             }
         });
