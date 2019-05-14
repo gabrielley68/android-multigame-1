@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.example.flori.android_multi_game.EndGameActivity;
 import com.example.flori.android_multi_game.MainActivity;
 import com.example.flori.android_multi_game.R;
+import com.example.flori.android_multi_game.utils.TimerUtils;
 import com.example.flori.android_multi_game.utils.TouchListener;
 import com.example.flori.android_multi_game.utils.GameUtils;
 
@@ -42,6 +43,8 @@ public class DragnDropFragmentInGame extends Fragment implements View.OnDragList
     private TextView score;
     private View round;
     private int number;
+
+    private TimerUtils timerUtils;
 
     private View rectangletop1;
     private View rectangletop2;
@@ -60,7 +63,6 @@ public class DragnDropFragmentInGame extends Fragment implements View.OnDragList
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).viewPager.setPagingEnabled(false);
         final View view = inflater.inflate(R.layout.fragment_drag_n_drop, container, false);
         final RelativeLayout dragndrop = view.findViewById(R.id.fragment_dragndrop_ingame);
         score = view.findViewById(R.id.fragment_fasttap_score);
@@ -125,20 +127,30 @@ public class DragnDropFragmentInGame extends Fragment implements View.OnDragList
 
         final TextView timer = view.findViewById(R.id.fragment_fasttap_time);
 
-        new CountDownTimer(30000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                timer.setText("Temps restant : " + millisUntilFinished / 1000);
-            }
+//        new CountDownTimer(30000, 1000) {
+//            public void onTick(long millisUntilFinished) {
+//                timer.setText("Temps restant : " + millisUntilFinished / 1000);
+//            }
+//
+//            public void onFinish() {
+//
+//                Intent intent = new Intent(getActivity(), EndGameActivity.class);
+//                intent.putExtra("SCORE", scoreTotal);
+//                GameUtils.launchView((AppCompatActivity) getActivity(), intent, false);
+//                DragnDropFragmentInGame.this.getFragmentManager().popBackStack();
+//            }
+//        }.start();
 
-            public void onFinish() {
-
+        timerUtils = new TimerUtils(timer, 30) {
+            @Override
+            public void end() {
                 Intent intent = new Intent(getActivity(), EndGameActivity.class);
                 intent.putExtra("SCORE", scoreTotal);
                 GameUtils.launchView((AppCompatActivity) getActivity(), intent, false);
                 DragnDropFragmentInGame.this.getFragmentManager().popBackStack();
-                ((MainActivity) getActivity()).viewPager.setPagingEnabled(true);
             }
-        }.start();
+        };
+        timerUtils.beginTimer();
     }
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -319,5 +331,9 @@ public class DragnDropFragmentInGame extends Fragment implements View.OnDragList
 
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timerUtils.stopTimer();
+    }
 }

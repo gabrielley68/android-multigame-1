@@ -28,6 +28,7 @@ import com.example.flori.android_multi_game.R;
 import com.example.flori.android_multi_game.ShowPlayerActivity;
 import com.example.flori.android_multi_game.utils.GameUtils;
 import com.example.flori.android_multi_game.utils.CustomViewPager;
+import com.example.flori.android_multi_game.utils.TimerUtils;
 
 import org.w3c.dom.Text;
 
@@ -39,6 +40,7 @@ public class FastTapFragmentInGame extends Fragment implements GestureDetector.O
     private int numbermax;
     private int number;
     private GestureDetector gestureDetector;
+    private TimerUtils timerUtils;
 
     private TextView tap;
     private TextView score;
@@ -68,24 +70,35 @@ public class FastTapFragmentInGame extends Fragment implements GestureDetector.O
     }
 
 
+    //J'ai revu la fonction pour qu'on puisse arrêter le timer
     public void startTimer(LayoutInflater inflater, ViewGroup container, View view) {
 
         final TextView timer = view.findViewById(R.id.fragment_fasttap_time);
 
-        new CountDownTimer(30000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                timer.setText("Temps restant : " + millisUntilFinished / 1000);
-            }
+//        new CountDownTimer(30000, 1000) {
+//            public void onTick(long millisUntilFinished) {
+//                timer.setText("Temps restant : " + millisUntilFinished / 1000);
+//            }
+//
+//            public void onFinish() {
+//
+//                Intent intent = new Intent(getActivity(), EndGameActivity.class);
+//                intent.putExtra("SCORE", scoreTotal);
+//                GameUtils.launchView((AppCompatActivity) getActivity(), intent, false);
+//                FastTapFragmentInGame.this.getFragmentManager().popBackStack();
+//            }
+//        }.start();
 
-            public void onFinish() {
-
+        timerUtils = new TimerUtils(timer, 30) {
+            @Override
+            public void end() {
                 Intent intent = new Intent(getActivity(), EndGameActivity.class);
                 intent.putExtra("SCORE", scoreTotal);
                 GameUtils.launchView((AppCompatActivity) getActivity(), intent, false);
                 FastTapFragmentInGame.this.getFragmentManager().popBackStack();
-                ((MainActivity) getActivity()).viewPager.setPagingEnabled(true);
             }
-        }.start();
+        };
+        timerUtils.beginTimer();
     }
 
     public int getRandomNumber(int first, int second) {
@@ -265,5 +278,13 @@ public class FastTapFragmentInGame extends Fragment implements GestureDetector.O
     public void addScore() {
         scoreTotal = scoreTotal + 1;
         score.setText("Score : " + scoreTotal);
+    }
+
+    //Gab : J'ai bouger le setpagingenabled ici pour qu'on puisse swipe si on change d'onglet
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timerUtils.stopTimer();
+        ((MainActivity) getActivity()).viewPager.setPagingEnabled(true);
     }
 }

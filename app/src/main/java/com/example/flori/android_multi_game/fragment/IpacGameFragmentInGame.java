@@ -39,7 +39,6 @@ public class IpacGameFragmentInGame extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        ((MainActivity) getActivity()).viewPager.setPagingEnabled(false);
         final View view = inflater.inflate(R.layout.fragment_ipac_game, container, false);
         final RelativeLayout dragndrop = view.findViewById(R.id.fragment_ipacgame_ingame);
 
@@ -88,7 +87,6 @@ public class IpacGameFragmentInGame extends Fragment {
                         intent.putExtra("SCORE", numberRemaining);
                         GameUtils.launchView((AppCompatActivity) getActivity(), intent, false);
                         IpacGameFragmentInGame.this.getFragmentManager().popBackStack();
-                        ((MainActivity) getActivity()).viewPager.setPagingEnabled(true);
                     } else {
                         numberRemaining--;
                         if (numberRemaining == 0) {
@@ -96,7 +94,6 @@ public class IpacGameFragmentInGame extends Fragment {
                             intent.putExtra("SCORE", numberRemaining);
                             GameUtils.launchView((AppCompatActivity) getActivity(), intent, false);
                             IpacGameFragmentInGame.this.getFragmentManager().popBackStack();
-                            ((MainActivity) getActivity()).viewPager.setPagingEnabled(true);
                         }
 
                         numberOfTry.setText(getResources().getString(R.string.number_try, numberRemaining));

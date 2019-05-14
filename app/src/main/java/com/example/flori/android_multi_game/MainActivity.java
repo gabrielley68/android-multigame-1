@@ -8,9 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.flori.android_multi_game.fragment.DragnDropFragmentInGame;
+import com.example.flori.android_multi_game.fragment.IpacGameFragmentInGame;
 import com.example.flori.android_multi_game.fragment.MenuFragment;
 import com.example.flori.android_multi_game.fragment.FastTapFragmentInGame;
 import com.example.flori.android_multi_game.fragment.SettingsFragment;
+import com.example.flori.android_multi_game.fragment.SwipeFragment;
 import com.example.flori.android_multi_game.utils.CustomViewPager;
 
 import java.util.ArrayList;
@@ -103,10 +106,17 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     }
 
     @Override
+    //Gab : Quand on change d'onglet on détruit le précédent
     public void onTabSelected(TabLayout.Tab tab) {
         for (Fragment fragment : getSupportFragmentManager().getFragments()) {
             for (Fragment subFragment : fragment.getChildFragmentManager().getFragments()) {
                 if (subFragment instanceof FastTapFragmentInGame) {
+                    subFragment.getFragmentManager().popBackStack();
+                }
+                else if(subFragment instanceof DragnDropFragmentInGame){
+                    subFragment.getFragmentManager().popBackStack();
+                }
+                else if(subFragment instanceof IpacGameFragmentInGame){
                     subFragment.getFragmentManager().popBackStack();
                 }
             }
